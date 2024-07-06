@@ -1,0 +1,94 @@
+1) Switch to root user
+   
+sudo su -
+
+
+2) Turn Off Swap Space
+     
+swapoff -a
+sed -i '/ swap / s/^\(.*\)$/#\1/g' /etc/fstab
+
+sudo swapoff -a
+
+   sudo sed -i '/ swap / s/^/#/' /etc/fstab
+============================================
+
+   1  sudo hostnamectl set-hostname master
+    2  sudo hostnamectl set-hostname master
+    3  exec bash
+    4  kubeadm init
+    5  exit
+    6  sudo vi /etc/hosts
+    7  ping www.google.com
+    8  sudo apt-get update && sudo apt-get upgrade -y
+    9  sudo swapoff -a
+   10  sudo sed -i '/ swap / s/^/#/' /etc/fstab
+   11  sudo apt-get update
+   12  sudo apt-get install -y apt-transport-https ca-certificates curl gpg
+   13  curl -fsSL https://pkgs.k8s.io/core:/stable:/v1.30/deb/Release.key | sudo gpg --dearmor -o /etc/apt/keyrings/kubernetes-apt-keyring.gpg
+   14  echo 'deb [signed-by=/etc/apt/keyrings/kubernetes-apt-keyring.gpg] https://pkgs.k8s.io/core:/stable:/v1.30/deb/ /' | sudo tee /etc/apt/sources.list.d/kubernetes.list
+   15  sudo apt-get update
+   16  sudo apt-get install -y kubelet kubeadm kubectl
+   17  sudo apt-mark hold kubelet kubeadm kubectl
+   18  sudo systemctl enable --now kubelet
+   19  history
+   20  apt install -y containerd
+   21  apt-mark hold containerd
+   22  cat <<EOF | sudo tee /etc/modules-load.d/containerd.conf
+   23  overlay
+   24  br_netfilter
+   25  EOF
+   26  modprobe overlay
+   27  modprobe br_netfilter
+   28  modprobe overlay
+   29  sudo modprobe overlay
+   30  sudo modprobe br_netfilter
+   31  cat <<EOF | sudo tee /etc/sysctl.d/k8s.conf
+   32  net.bridge.bridge-nf-call-iptables = 1
+   33  net.bridge.bridge-nf-call-ip6tables = 1
+   34  net.ipv4.ip_forward = 1
+   35  EOF
+   36  sudo sysctl --system
+   37  mkdir -p /etc/containerd
+   38  containerd config default | sudo tee /etc/containerd/config.toml
+   39  systemctl restart containerd
+   40  systemctl daemon-reload
+   41  systemctl start kubelet
+   42  systemctl enable kubelet.service
+   43  sudo su -
+   44  exit
+
+
+  1  sudo su -
+    2  kubectl version
+    3  kubectl get nodes
+    4  mkdir -p $HOME/.kube
+    5  ls
+    6  sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+    7  sudo chown $(id -u):$(id -g) $HOME/.kube/config
+    8  kubectl get nodes
+    9  kubectl get pods
+   10  kubectl get pods -n kube-system
+   11  kubectl get pods -n kube-system -o wide
+   12  $ kubectl apply -f https://github.com/weaveworks/weave/releases/download/v2.8.1/weave-daemonset-k8s.yaml
+   13  kubectl apply -f https://github.com/weaveworks/weave/releases/download/v2.8.1/weave-daemonset-k8s.yaml
+   14  kubectl get pods -n kube-system -o wide
+   15  kubeadm token create --print-join-command
+   16  kubectl get nodes
+
+
+
+
+
+===========================================================================
+
+Step 1: Disable swap
+Step 2: Set up hostnames
+Step 3: Update the /etc/hosts File for Hostname Resolution
+Step 4: Set up the IPV4 bridge on all nodes
+Step 5: Install kubelet, kubeadm, and kubectl on each node
+Step 6: Install Docker
+Step 7: Initialize the Kubernetes cluster on the master node
+Step 8: Configure kubectl and Calico
+Step 9: Add worker nodes to the cluster
+Step 10: Verify the cluster and test

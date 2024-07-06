@@ -1,0 +1,449 @@
+    1  sudo su -
+    2  mkdir -p $HOME/.kube
+    3  sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+    4  sudo chown $(id -u):$(id -g) $HOME/.kube/config
+    5  kubectl get pods -o wide --all-namespaces
+    6  kubectl apply -f https://github.com/weaveworks/weave/releases/download/v2.8.1/weave-daemonset-k8s.yaml
+    7  kubectl get pods -o wide --all-namespaces
+    8  kubectl get nodes
+    9  kubeadm token create --print-join-command
+   10  kubectl get nodes
+   11  kubectl get pods -o wide --all-namespaces
+   12  kubectl get services
+   13  kubectl get services -A
+   14  kubectl get services --all
+   15  kubectl get services --a
+   16  kubectl get services -all
+   17  kubectl get services -A
+   18  kubectl get services -A -o wide
+   19  history
+   20  sudo su -
+   21  kubectl get services -A -o wide
+   22  kubectl get services 
+   23  kubectl get nodes
+   24  vi maven.yml
+   25  kubectl get services -A -o wide
+   26  kubectl get pods -o wide --all-namespaces
+   27  kubectl get -n kube-system
+   28  kubectl get namespace -n kube-system
+   29  kubectl get namespace 
+   30  kubectl create namespace test-ns
+   31  kubectl get namespace 
+   32  kubectl apply -f maven.yml 
+   33  kubectl get pods -A
+   34  vi maven.yml 
+   35  kubectl apply -f maven.yml 
+   36  kubectl get pods -A
+   37  kubectl apply -f maven.yml 
+   38  kubectl get pods -A
+   39  kubectl get pods -n test-ns
+   40  kubectl describe pods mavenpod -n test-ns
+   41  vi mvnsvc.yml
+   42  kubectl apply -f mvnsvc.yml --dry-run=client
+   43  kubectl apply -f mvnsvc.yml --dry-run=server
+   44  vi mvnsvc.yml
+   45  kubectl apply -f mvnsvc.yml --dry-run=server
+   46  vi mvnsvc.yml
+   47  kubectl apply -f mvnsvc.yml --dry-run=server
+   48  kubectl apply -f mvnsvc.yml 
+   49  vi mvnsvc.yml
+   50  kubectl describe svc mavensvc -n test-ns
+   51  curl -v 10.103.103.204/maven-web-application/
+   52  vi node.yml
+   53  kubectl apply -f node.yml --dry-run=server
+   54  kubectl apply -f node.yml --dry-run=client
+   55  kubectl apply -f node.yml 
+   56  kubectl describe svc mavensvc -n test-ns
+   57  kubectl get pods -n test-ns
+   58  vi mvnsvc.yml
+   59  vi nodesvc.yml
+   60  kubectl apply -f nodesvc.yml --dry-run=client
+   61  kubectl apply -f nodesvc.yml --dry-run=server
+   62  vi nodesvc.yml
+   63  kubectl apply -f nodesvc.yml --dry-run=server
+   64  ls
+   65  vi node
+   66  vi nodesvc.yml
+   67  ls
+   68  vi node.yml 
+   69  ls
+   70  vi nodesvc.yml 
+   71  ls
+   72  kubectl svc -n test-ns
+   73  kubectl get svc -n test-ns
+   74  kubectl svc -n test-ns
+   75  kubectl apply -f nodesvc.yml --dry-run=server
+   76  kubectl apply -f nodesvc.yml
+   77  kubectl svc -n test-ns
+   78  kubectl get svc -n test-ns
+   79  kubectl describe svc nodesvc -n test-ns
+   80  curl -v 10.111.204.105/jsonData
+   81  curl -v 10.111.204.105/html
+   82  kubectl describe svc nodesvc -n test-ns
+   83  kubectl describe pods nodepod -n test-ns
+   84  ls
+   85  vi nodesvc.yml 
+   86  kubectl apply -f nodesvc.yml --dry-run=server
+   87  kubectl apply -f nodesvc.yml
+   88  kubectl apply -f nodesvc.yml --dry-run=server
+   89  kubectl describe svc nodesvc -n test-ns
+   90  curl -v 10.111.204.105/jsonData
+   91  git --version
+   92  docker info
+   93  kubectl delete pods mavenpod -n test-ns
+   94  ls
+   95  kubectl get pods -A
+   96  kubectl delete pods nodepod
+   97  kubectl delete pods nodepod -n test-ns
+   98  kubectl get pods -A
+   99  kubectl desribe pods mavenpod -n test-ns
+  100  kubectl describe pods mavenpod -n test-ns
+  101  kubectl get pods -A
+  102  kubectl describe pods mavenpod -n test-ns
+  103  kubectl get pods -A
+  104  kubectl get pods -A
+  105  kubectl get namespaces -A
+  106  kubectl get pods -A
+  107  kubectl get namespaces -A
+  108  kubectl get pods -A
+  109  kubectl get namespaces -A
+  110  kubectl get pods -A
+  111  ls
+  112  kubectl get pods -A
+  113  sudo ls /etc/
+  114  sudo ls /etc/kubernetes/
+  115  kubectl get pods -A
+  116  kubectl logs mavenpod --tail=10
+  117  kubectl logs mavenpod --tail=10 -n test-ns
+  118  kubectl logs mavenpod --tail=20 -n test-ns
+  119  kubectl logs mavenpod --tail=30 -n test-ns
+  120  kubectl logs mavenpod  -n test-ns
+  121  kubectl get pods -A
+  122  kubectl delete namespace -n test-ns
+  123  kubectl delete namespace  test-ns
+  124  clear
+  125  ls
+  126  kubectl get pods -A
+  127  kubectl get  namespace  test-ns
+  128  kubectl delete pod mavenpod --grace-period=0 --force
+  129  kubectl delete pod mavenpod --grace-period=0 --force -n test-ns
+  130  kubectl get pods -A
+  131  kubectl delete pod nodepod --grace-period=0 --force -n test-ns
+  132  kubectl get pods -A
+  133  kubectl get  namespace  test-ns
+  134  kubectl get pods -A
+  135  kubectl get -A
+  136  kubectl get all -A
+  137  kubectl get namespace
+  138  kubectl get namespace -A
+  139  ls
+  140  clar
+  141  clear
+  142  ls
+  143  kubectl get svc -A
+  144  kubectl get svc -A - n test-ns
+  145  kubectl get svc -A 
+  146  kubectl get svc all -A 
+  147  kubectl get svc all 
+  148  kubectl get svc -A
+  149  grep *
+  150  ls
+  151  vi
+  152  vi maven.yml 
+  153  vi mvnsvc.yml 
+  154  kubectl api-resources
+  155  ls
+  156  vi multicontainer.yml
+  157  ls
+  158  kubectl apply -f multicontainer.yml --dry-run=client
+  159  vi multicontainer.yml
+  160  kubectl apply -f multicontainer.yml --dry-run=client
+  161  kubectl apply -f multicontainer.yml --dry-run=server
+  162  kubectl apply -f multicontainer.yml
+  163  kubectl get pods
+  164  kubectl get pods -A
+  165  kubectl get pods -n default
+  166  kubectl get svc -A
+  167  kubectl describe svc  multiservice 
+  168  curl -v 10.111.241.140/
+  169  curl -v 10.111.241.140:8080/
+  170  curl -v 10.111.241.140:8080/maven-web-application/
+  171  curl -v 10.111.241.140:9981/maven-web-application/
+  172  curl -v 10.111.241.140:9981/jsonData
+  173  curl -v 10.111.241.140:9981/html
+  174  vi node.yml 
+  175  clear
+  176  kubectl get nodes
+  177  ls
+  178  vi mavenrc.yml
+  179  kubectl get pods
+  180  kubectl delete pods multi-pod --grace-period=0 --force -n test-ns
+  181  kubectl get pods
+  182  kubectl delete pods multi-pod --grace-period=0 --force -n test-ns
+  183  kubectl get pods
+  184  kubectl delete pods multi-pod  --force -n test-ns
+  185  decribe pods multi-pod
+  186  describe pods multi-pod
+  187  kubectl describe pods multi-pod
+  188  kubectl delete pods multi-pod --grace-period=0 --force -n test-ns
+  189  kubectl get pods -A 
+  190  kubectl get pods -A -o wide
+  191  kubectl delete pods multi-pod --grace-period=0 --force -n test-ns
+  192  kubectl get pods -A -o wide
+  193  kubectl get pods -A 
+  194  kubectl get pods -A -n test-ns
+  195  kubectl get pods  -n test-ns
+  196  kubectl delete pods multi-pod --grace-period=0 --force
+  197  kubectl get pods  -n test-ns
+  198  kubectl get pods  
+  199  kubectl get pods -n test-ns 
+  200  kubectl get pods -A 
+  201  kubectl get pods -A -o wide
+  202  ls
+  203  vi mavenrc.yml 
+  204  kubectl svc -A
+  205  kubectl create namespace test-ns
+  206  kubectl apply -f mavenrc.yml --dry-run=client
+  207  vi mavenrc.yml 
+  208  kubectl apply -f mavenrc.yml --dry-run=client
+  209  kubectl apply -f mavenrc.yml --dry-run=server
+  210  vi mavenrc.yml 
+  211  kubectl apply -f mavenrc.yml --dry-run=server
+  212  kubectl apply -f mavenrc.yml --dry-run=client
+  213  kubectl apply -f mavenrc.yml --dry-run=server
+  214  kubectl apply -f mavenrc.yml
+  215  kubect get pods -A
+  216  kubect get pods -A -n test-ns
+  217  kubectl get pods -A -n test-ns
+  218  kubect get pods -A -n test-ns
+  219  kubectl get pods -A -n test-ns
+  220  vi mavenrc.yml 
+  221  kubectl get pods -A -n test-ns
+  222  kubectl apply -f mavenrc.yml --dry-run=server
+  223  kubectl apply -f mavenrc.yml
+  224  kubectl get pods -A -n test-ns
+  225  kubectl apply -f mavenrc.yml
+  226  kubectl get pods -A -n test-ns
+  227  vi mavenrc.yml 
+  228  kubectl get pods -A -n test-ns
+  229  vi mavenrc.yml 
+  230  kubectl get pods -A -n test-ns
+  231  vi mavenrc.yml 
+  232  kubectl get pods -A -n test-ns
+  233  kubectl apply -f mavenrc.yml --dry-run=server
+  234  kubectl apply -f mavenrc.yml --dry-run=client
+  235  kubectl apply -f mavenrc.yml --dry-run=server
+  236  kubectl apply -f mavenrc.yml
+  237  kubectl get pods -A -n test-ns
+  238  kubectl delete pod mavenrc-4z7r2 -n test-ns
+  239  kubectl get pods -A -n test-ns
+  240  kubectl delete pod mavenrc-vkdnz -n test-ns
+  241  kubectl get pods -A -n test-ns
+  242  kubectl get all  -n test-ns
+  243  kubectl get pods -A -n test-ns
+  244  kubectl get all  -n test-ns
+  245  kubectl desribe pod javarc-bwdrz -n test-ns
+  246  kubectl describe pod javarc-bwdrz -n test-ns
+  247  kubectl describe svc rcsvc -n test-ns
+  248  kubectl get all  -n test-ns
+  249  kubectl delete  all  -n test-ns
+  250  kubectl delete pods  all  -n test-ns
+  251  kubectl delete pods  -n test-ns
+  252  kubectl delete all pods  -n test-ns
+  253  vi mavenrc.yml 
+  254  kubectl apply -f mavenrc.yml --dry-run=server
+  255  kubectl apply -f mavenrc.yml
+  256  kubectl get all  -n test-ns
+  257  vi mavenrc.yml 
+  258  kubectl get all  -n test-ns
+  259  kubectl delete rc replicationcontroller/mavenrc -n test-ns
+  260  kubectl delete rc mavenrc -n test-ns
+  261  kubectl get all  -n test-ns
+  262  kubectl describe svc rcsvc -n test-ns
+  263  kubectl get all  -n test-ns
+  264  kubectl delete rc javarc -n test-ns
+  265  ls
+  266  kubectl get all  -n test-ns
+  267  kubectl delete svc rcsvc -n test-ns
+  268  kubectl get all  -n test-ns
+  269  kubectl get all  -A
+  270  ls
+  271  vi multicontainer.yml 
+  272  vi mavenrc.yml 
+  273  vi mvnsvc.yml 
+  274  vi node.yml 
+  275  vi nodesvc.yml 
+  276  vi maven.yml 
+  277  vi maven.yaml 
+  278  vi maven.yml 
+  279  kubectl get all  -A
+  280  kubectl delete namespace tes-ns
+  281  kubectl delete namespace test-ns
+  282  kubectl delete service multiservice
+  283  kubectl get pod -A
+  284  kubectl get pod all -o wide
+  285  kubectl get  all -o wide
+  286  kubectl get namespace -A
+  287  kubectl get svc -A
+  288  kubectl get namespcae -A
+  289  kubectl get namespace -A
+  290  kubectl get svc -A
+  291  kubectl get  all -o wide
+  292  kubectl get pods -A -n test-ns
+  293  ls
+  294  vi maven.yml 
+  295  kubectl get nodes
+  296  kubectl get pods
+  297  kubectl get pods -A
+  298  kubectl get pods -N
+  299  kubectl get pods namespace -A
+  300  kubectl get  namespace -A
+  301  kubectl descibe namespace test-ns
+  302  kubectl describe namespace test-ns
+  303  sudo ls /etc/kuberenetes/manifest/
+  304  sudo ls /etc/
+  305  sudo ls /etc/kubernetes
+  306  sudo ls /etc/kubernetes/manifests
+  307  vi staticpod
+  308  mv staticpod staticpod.yml
+  309  ls
+  310  vi staticpod.yml 
+  311  cp staticpod.yml /etc/kubernetes/manifests
+  312  sudo cp staticpod.yml /etc/kubernetes/manifests
+  313  sudo ls /etc/kubernetes/manifests
+  314  kubectl apply staticpod.yml --dry-run=server
+  315  kubectl apply -f staticpod.yml --dry-run=server
+  316  kubectl apply -f staticpod.yml --dry-run=client
+  317  kubectl apply -f staticpod.yml --dry-run=server
+  318  kubectl get pods
+  319  sudo rm 
+  320  kubectl delete pod staticpod-ip-172-31-43-41
+  321  kubectl get pods -A
+  322  sudo rm /etc/kubernetes/manifests/staticpod.yml
+  323  kubectl get pods -A
+  324  kubectl delete pod staticpod-ip-172-31-43-41
+  325  clear
+  326  kubectl api-resources
+  327  kubectl get namespaces
+  328  kubectl create namespace test-ns
+  329  kubectl get namespaces
+  330  kubectl delete ds nginxds -n test-ns --force
+  331  tty
+  332  kubectl get namespaces
+  333  kubectl describe namesapce tet-ns
+  334  kubectl describe namesapce test-ns
+  335  kubectl describe ns test-ns
+  336  kubectl get namespaces
+  337  kubectl get pods
+  338  kubectl get pods -n test-ns
+  339  kubectl get all  -n test-ns
+  340  kubectl get pods -n test-ns -o wide
+  341  kubectl get all -n test-ns -o wide
+  342  kubectl get all  -o wide
+  343  kubectl get all  -o wide -n test-ns
+  344  kubectl get all  -o wide 
+  345  kubectl get pods  -o wide 
+  346  kubectl get pods  -o wide -n test-ns
+  347  kubectl delete namespace test-ns --grace-period=0 --force
+  348  ls
+  349  kubectl get nodes
+  350  kubectl describe ip-172-31-43-41
+  351  kubectl describe nodes ip-172-31-43-41
+  352  kubectl get pods  -o wide 
+  353  kubectl get pods  -o wide -n test-ns2
+  354  clear
+  355  ls
+  356  vi nginxds
+  357  ls
+  358  mv nginxds nginxds.yml
+  359  ls
+  360  vi nginxds
+  361* vi nginxds.yml [B
+  362  kubectl apply -f nginxds.yml --dry-run=client
+  363  kubectl apply -f nginxds.yml --dry-run=server
+  364  vi nginxds.yml 
+  365  kubectl apply -f nginxds.yml --dry-run=server
+  366  vi nginxds.yml 
+  367  kubectl apply -f nginxds.yml --dry-run=server
+  368  vi nginxds.yml 
+  369  kubectl apply -f nginxds.yml --dry-run=server
+  370  vi nginxds.yml 
+  371  kubectl apply -f nginxds.yml --dry-run=server
+  372  vi nginxds.yml 
+  373  kubectl apply -f nginxds.yml --dry-run=server
+  374  kubectl apply -f nginxds.yml --dry-run=client
+  375  kubectl apply -f nginxds.yml --dry-run=server
+  376  kubectl apply -f nginxds.yml
+  377  kubectl get all -o wide
+  378  kubectl get pods all -o wide
+  379  kubectl get pod all -o wide
+  380  kubectl get pods -o wide
+  381  kubectl get pods -o wide -n test-ns
+  382  kubectl get all -o wide -n test-ns
+  383  kubectl get pods -o wide -n test-ns
+  384  kubectl delete ds nginxds -n test-ns
+  385  kubectl get pods -o wide -n test-ns
+  386  kubectl get pods -o wide -n test-ns 
+  387  kubectl get pods -o wide -n test-ns
+  388  kubectl get pods -o wide -n test-ns --force
+  389  kubectl get pods -o wide -n test-ns --force
+  390  kubectl get pods -o wide -n test-ns
+  391  kubectl delete ds nginxds -n test-ns --force
+  392  kubectl delete ds nginxds -n test-ns --grace-period=0 --force
+  393  kubectl get pods -o wide -n test-ns
+  394  tty
+  395  kubectl get ns
+  396  kubectl get pods -o wide -n test-ns
+  397  kubectl get ns
+  398  kubectl create namespace test-ns2
+  399  kubectl get ns
+  400  kubectl get pods -o wide -n test-ns2
+  401  kubectl get pods -o wide
+  402  kubectl get pods -o wide -n kube-system
+  403  kubectl get all -o wide -n kube-system
+  404  kubectl describe all -o wide -n kube-system
+  405  kubectl get all -o wide -n kube-system
+  406  kubectl describe ns -test-ns2
+  407  kubectl get ns -test-ns2
+  408  kubectl describe ns -n test-ns2
+  409  ls
+  410  vi taints_ds.yml
+  411  kubectl apply -f taints_ds.yml --dry-run=client
+  412  kubectl apply -f taints_ds.yml --dry-run=server
+  413  vi taints_ds.yml
+  414  kubectl apply -f taints_ds.yml --dry-run=server
+  415  kubectl apply -f taints_ds.yml --dry-run=client
+  416  vi taints_ds.yml
+  417  kubectl apply -f taints_ds.yml --dry-run=client
+  418  kubectl apply -f taints_ds.yml --dry-run=server
+  419  kubectl apply -f taints_ds.yml
+  420  kubectl get pods -o wide -n test-ns2
+  421  kubectl get nodes
+  422  kubectl get all -o wide -n test-ns
+  423  kubectl get all -o wide -n test-ns2
+  424  kubectl delete ds taintsds --grace-period=0 --force -n test-ns2
+  425  kubectl get all -o wide -n test-ns2
+  426  kubectl get -n test-ns2
+  427  kubectl get -A -n test-ns2
+  428  kubectl descibe ns -n test-ns2
+  429  kubectl descibe ns  test-ns2
+  430  kubectl describe ns  test-ns2
+  431  kubectl describe namespace  test-ns2
+  432  kubectl describe kube-system
+  433  kubectl describe namespcae kube-system
+  434  kubectl describe namespace kube-system
+  435  kubectl describe ns  -n test-ns2
+  436  kubectl delete namespace -n test-ns2
+  437  kubectl delete namespace test-ns2
+  438  kubectl describe ns  -n test-ns2
+  439  kubectl delete namespace test-ns2
+  440  clear
+  441  kubectl get pod -A
+  442  kubectl namespace -n test-ns
+  443  kubectl get namespace -n test-ns
+  444  kubectl describe namespace -n kube-public
+  445  clear
+  446  kubectl get nodes
+  447  kubectl get pod -A
+  448  history
+  449  history > new_file2

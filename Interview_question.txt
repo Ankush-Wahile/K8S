@@ -1,0 +1,8 @@
+HPA ---> Horizontal pod Autoscaler
+
+What is Heapster in k8s?
+
+What is the difference b/w heapter and metricsServer?
+
+Q. Tell me the package manager for deploying the application in k8s?
+ans--> Helm  --> is  the package manager for deploying the application in k8s

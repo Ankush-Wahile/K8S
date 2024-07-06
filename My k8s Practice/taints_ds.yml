@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: taintsds
+  namespace: test-ns2
+spec:
+  selector:
+    matchLabels:
+      app: nginxapp
+  template:
+      metadata:
+        name: nginxdspod
+        labels:
+          app: nginxapp
+        namespace: test-ns2
+      spec:
+        tolerations:
+          - key: node-role.kubernetes.io/control-plane
+            operator: Exists
+            effect: NoSchedule
+        containers:
+          - name: nginxcontainer
+            image: nginx
+            ports:
+              - containerPort: 80
+            
+
+
+
+

@@ -1,0 +1,163 @@
+apiVersion: v1
+kind: Service
+metadata:
+   name: <Servicename>
+   namespace: <namespace>
+spec:
+   type: ClusterIP
+   selector:						## POD Labels as a selector  ## plays key role
+       <PODLabelKey>: <PODLABELVALUE>
+   ports:
+    - port: <ServicePort>
+      targetPort: <ContainerPort> 
+
+
+
+
+
+
+lecture 5 services
+
+  1  sudo su -
+    2  kubectl version
+    3  kubectl get nodes
+    4  mkdir -p $HOME/.kube
+    5  ls
+    6  sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+    7  sudo chown $(id -u):$(id -g) $HOME/.kube/config
+    8  kubectl get nodes
+    9  kubectl get pods
+   10  kubectl get pods -n kube-system
+   11  kubectl get pods -n kube-system -o wide
+   12  $ kubectl apply -f https://github.com/weaveworks/weave/releases/download/v2.8.1/weave-daemonset-k8s.yaml
+   13  kubectl apply -f https://github.com/weaveworks/weave/releases/download/v2.8.1/weave-daemonset-k8s.yaml
+   14  kubectl get pods -n kube-system -o wide
+   15  kubeadm token create --print-join-command
+   16  kubectl get nodes
+   17  history
+   18  sudo su -
+   19  exit
+   20  kubectl describe nodes node2
+   21  clear
+   22  kubectl get nodes
+   23  kubectl get all -n test-ns
+   24  kubectl get all -n test
+   25  kubectl get ns
+   26  kubectl get all --all-namespaces
+   27  vi mavenewebapppod.yaml
+   28  kubectl apply -f mavenewebapppod.yaml --dry-run=client
+   29  kubectl apply -f mavenewebapppod.yaml --dry-run=server
+   30  kubectl apply -f mavenewebapppod.yaml -n test-ns --dry-run=server
+   31  kubectl apply -f mavenewebapppod.yaml --dry-run=server
+   32  vi mavenewebapppod.yaml
+   33  kubectl get all -n ns
+   34  kubectl get all
+   35  kubectl get all --all-namespaces
+   36  kubectl get namespaces
+   37  kubectl create namespace test-ns
+   38  kubectl apply -f mavenewebapppod.yaml --dry-run=server
+   39  kubectl get namespaces
+   40  kubectl get pods -n test-ns
+   41  kubectl get namespaces
+   42  kubectl get pods
+   43  kubectl apply -f mavenewebapppod.yaml
+   44  kubectl get pods
+   45  kubectl get pods -n test-ns
+   46  kubectl get all
+   47  kubectl describe pod mavenewebapppod
+   48  kubectl describe pod mavenewebapppod -n test-ns
+   49  kubectl describe pod mavenwebapppod -n test-ns
+   50  vi mavenewebapppod.yaml
+   51  kubectl update -f mavenewebapppod.yaml
+   52  kubectl update  mavenewebapppod.yaml
+   53  kubectl update  mavenewebapppod
+   54  kubectl apply -f mavenewebapppod.yaml
+   55  kubectl describe pod mavenwebapppod -n test-ns
+   56  kubectl get node
+   57  kubectl get nodes
+   58  kubectl describe node node1
+   59  kubectl describe node master
+   60  kubectl get nodes - o wide -n test-ns
+   61  kubectl get pods - o wide -n test-ns
+   62  kubectl get pod - o wide -n test-ns
+   63  kubectl get pod -o wide -n test-ns
+   64  kubectl get node -o wide -n test-ns
+   65  kubectl get node -o wide
+   66  ls
+   67  clear
+   68  ls
+   69  vi mavenewebapppod.yaml
+   70  kubectl get nodes
+   71  kubectl describe  nodes master
+   72  kubectl describe  nodes node1
+   73  kubectl get -n all
+   74  kubectl get --all -namespace
+   75  kubectl get --a -namespace
+   76  kubectl get -a -namespace
+   77  kubectl get all -namespace
+   78  kubectl get all -namespaces
+   79  kubectl get all namespaces
+   80  kubectl get -all namespaces
+   81  kubectl get -all -namespaces
+   82  kubectl get namespaces
+   83  kubectl get pods -n test-ns
+   84  kubectl describe pods mavenewebapppod
+   85  kubectl describe pods mavenewebapppod -n test-ns
+   86  kubectl describe pod mavenewebapppod -n test-ns
+   87  kubectl get pods -n test-ns
+   88  kubectl describe pod mavenwebapppod -n test-ns
+   89  kubectl logs mavenwebapppod -n test-ns
+   90  kubectl get pods -n test-ns -o wide
+   91  kubectl logs mavenwebapppod -n test-ns
+   92  kubectl get services
+   93  kubectl get services --all
+   94  kubectl get services -n default
+   95  kubectl get services -n test-ns
+   96  kubectl get services --all-namespaces
+   97  history
+   98  exit
+   99  clear
+  100  kubectl get pods -n kube-system
+  101  kubectl api-resources
+  102  ls
+  103  vi mavenewebapppod.yaml
+  104  clear
+  105  kubectl get pods
+  106  kubectl get pods -n test-ns
+  107  ls
+  108  vi mavenewebapppod.yaml
+  109  kubectl get service -n test-ns
+  110  kubectl get services -n test-ns
+  111  kubectl get services
+  112  kubectl appy -f mavenewebapppod.yaml
+  113  kubectl apply -f mavenewebapppod.yaml
+  114  kubectl get services
+  115  kubectl get all
+  116  kubectl get services -n test-ns
+  117  kubectl describe svc mavenwebappsvc
+  118  kubectl describe svc mavenwebappsvc -n test-ns
+  119  curl -v 10.101.252.232/maven-web-application/
+  120  no endpoints
+  121  give correct labels
+  122  and apply file again
+  123  vi mavenewebapppod.yaml
+  124  kubectl apply -f mavenewebapppod.yaml
+  125  kubectl describe svc mavenwebappsvc -n test-ns
+  126  kubeclt get pods --show-labels -n test-ns
+  127  kubectl get pods --show-labels -n test-ns
+  128  vi mavenewebapppod.yaml
+  129  kubectl get svc -o wide -n test-ns
+  130  kubectl describe svc mavenwebappsvc -n test-ns
+  131  kubectl get pods -o wide -n test-ns
+  132  curl -v 10.101.252.232:8080/maven-web-application/
+  133  curl -v 10.101.252.232:80/maven-web-application/
+  134  curl -v 10.101.252.232/maven-web-application/
+  135  curl -v 10.101.252.232:8080/maven-web-application/
+  136  curl -v 10.101.252.232:80/maven-web-application/
+  137  exit
+  138  curl -v 10.101.252.232:80/maven-web-application/
+
+
+
+
+

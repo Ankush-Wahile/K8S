@@ -1,0 +1,214 @@
+apiVersion: v1
+kind: Pod
+metadata:
+    name: testpod
+    labels:
+       app: javawebapp
+spec:
+    containers:
+     - name: javawebappcontainer
+       image: ankush3891/java-web-app:1     #this image is not available in your registry
+       ports:
+       - containerPort: 8080
+     - name: nginxcontainer
+       image: nginx                                        # it will pull latest image of nginx
+       ports:
+       - containerPort: 80
+
+
+
+
+kubectl apply -f multicontainerpod.yml
+
+kubectl get pods
+
+## Both container in that pod created/schedule in the same node
+
+================================================
+||   -----------------------------------      -----------------------------------      ||
+||   | javawebappcontainer |     |   nginxcontainer           |     ||          
+||   |                                     |     |                                      |     ||
+||   |   port 8080                  |     |   port 80                       |     ||
+||   -----------------------------------     ------------------------------------     || 
+||											     ||
+|| 				Multicontainer pod -testpod	             ||
+================================================
+
+
+kubectl exec -it testpod  -- bash  --->> it will go inside the defaulted container which is the first container in the       	                                                 multicontainerpod.yaml file
+
+If you are inside the container of one application and you want to communicate to other container in that same pod then we can use only localhost --->>> curl -v localhost
+
+-----
+
+If we want to communication b/w po to pod then we use service ---> ClusterIP
+
+----
+
+If you want to access other pod within "different namespace" then you have use FQDN --> Fully Qualified Domain Name.
+
+<ServiceName>.<NameSpaceName>.svc.cluster.local
+
+ex.  mvnservice.test-ns.svc.cluster.local
+
+ex. curl  -v  mvnservice.test-ns.svc.cluster.local/maven-web-application/
+
+### If you want to access form outside of the cluster we use NodePort Service  -- also we can access inside
+
+### In Linux to show line number -->   :se nu
+
+###
+
+ 
+apiVersion: v1
+kind: Pod
+metadata:
+    name: testpod
+    labels:
+       app: javawebapp
+spec:
+    containers:
+     - name: javawebappcontainer
+       image: ankush3891/java-web-app:1     #this image is not available in your registry
+       ports:
+       - containerPort: 8080
+     - name: nginxcontainer
+       image: nginx                                        # it will pull latest image of nginx
+       ports:
+       - containerPort: 80
+
+
+---
+apiVersion: v1
+kind: Service
+metadata: 
+  name: testsvc
+spec:
+  type: NodePort
+  selector: 
+      app: javawebapp
+  ports: 
+  - port: 8080 ## service Port
+    targetPort: 8080   ## container Port
+    name: tomcat
+  - port: 80   ## service Port
+    targetPort: 80  ## container Port
+    name: nginx
+ 
+
+In above we can not give same port in one service 
+When we define multiple ports 'name' is mandatory  -- not for single port
+
+kubectl apply -f  multicontainerpod.yml
+
+kubectl get all
+
+### open the ports that the service will give after executing the above command in ports section -- in aws security group
+
+## Now I want to access other/ testpod [ it is default namespace ]  from the nodejspod [ it is in test-ns namespace ]
+## For accesing other pods which are in different namespaces we have to use FQDN--> Fully Qualified Domain Name
+
+## kubectl exec -it nodejspod -n test-ns -- bash
+
+curl -v testsvc.default.svc.cluster.local   -->> by default it is target to 80 port so whichever the container port expose to that port it is directed request to that port
+
+## for a port which is expose to 8080 -- I want that container to be accessed then
+curl -v testsvc.default.svc.cluster.local:8080
+curl -v testsvc.default.svc.cluster.local:8080/maven-web-application/
+
+
+====================
+Q. How many pods we can deploy in the cluster?
+---> It is based on the cluster resources available.
+---> It is not recommended to deploy multiple pods.
+======
+
+Q. What is the cluster capacity ? or how much resources (CPU and Memory) u have available in the clusters? 
+---> There is 'resource' tag in k8s yml file-> which contains 'request' and 'limits'
+---> Resource reuests and limits is at container level [i.e it will check the all the available resources and scheduled the container based on requested cpu and memory ]
+---> Sum of all existing resource request < Available Resource in the node. 
+============
+
+Suppose , I want to deploy 600 pods
+Each pod has 1 container that container is requesting 1GB RAM  1 CPU and limits 2GB  and 2 CPU
+SO, collectively we need 1500GB  and 1300 CPU
+
+
+
+20 Nodes  -  800 pods
+ each node 128 GB RAM
+                   64 Core CPU
+
+====================================
+
+There are various STATUS of a pod
+1. Pending---> It's pending state for some reason it's unscheduled. It can be due to insufficient resources or there could be some other reason.
+
+solve--> kubectl describe pod <podname>
+
+2. CrashLoopBackOff ----> There is issue with code,image,container--> k8s try to create and run container but it is not running.
+Container process not started successfully/because of image/code
+
+In that case we should check with the developers for code check
+
+solve--> kubectl describe pod <podname>
+	     kubectl logs <podname> -c <container_name>
+
+
+3. ImagePullBackOff/ErrorImagePull--->
+
+Not able to pull the image for two reasons --> 1. Wrong registry details/Private registry details-not authenticating                    	                                                                       properly
+	                                                                   2. Private registry details-not authenticating properly
+
+
+
+4. Running---> pod is deployed successfully and container is running
+
+
+5. CreateContainerConfigError-->
+
+There are some k8s concepts like ConfigMap and Secrets---> You are refering ConfigMap and Secrets in your pod manifest and you don't have ConfigMap and Secrets created/ in the cluster.
+
+
+=====================
+
+kubectl describe node <Nodename/IP>
+
+======
+To delete all the resources in default  namespace and defined namespace.
+
+kubectl delete all --all  -n test-ns
+
+
+NOTE--> Don't delete the kube-system namespace.
+
+======================================================
+
+
+
+
+
+
+
+
+
+===========================================================
+NOTE--->> 
+
+In real time we are going to use controllers 
+
+You should not create a pod directly you have to use different controllers.
+PODs should be created and managed by some controllers.
+like
+
+ReplicationController
+ReplicaSet
+DaemonSet
+Deployment
+StatefulSet
+
+That controller will create and manage the pods , if something happen to that pod it will look after that pod.
+It will recreate and reschedule that pod.Pods will be replicated. Make sure high availability.(According to replica we want)
+
+
+==========================================

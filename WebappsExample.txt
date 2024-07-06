@@ -1,0 +1,85 @@
+I'm not sure about redis, but I have a similar application. I have a Java web application running as a pod that is exposed to the outside world through a nodePort. I have a mongodb container running as a pod.
+
+In the webapp deployment specifications, I map it to the mongodb service through its name by passing the service name as parameter, I have pasted the specification below. You can modify accordingly.There should be a similar mapping parameter in Redis also where you would have to use the service name which is "mongoservice" in my case.
+
+
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: empappdepl
+    labels:
+      name: empapp
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        name: empapp
+    spec:
+      containers:
+      - resources:
+        limits:
+          cpu: 0.2
+            image: registryip:5000/employee:1
+            imagePullPolicy: IfNotPresent
+            name: wsemp
+            ports:
+              - containerPort: 8080
+                name: wsemp
+            command: ["java","-Dspring.data.mongodb.uri=mongodb://mongoservice/microservices", "-Djava.security.egd=file:/dev/./urandom","-jar","/app.jar"]
+        imagePullSecrets:
+        - name: myregistrykey
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    name: empwhatever
+  name: empservice
+spec:
+  ports:
+  - port: 8080
+    targetPort: 8080
+    protocol: TCP
+    name: http
+    nodePort: 30062
+  type: NodePort
+  selector:
+    name: empapp
+---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: mongodbdepl
+  labels:
+    name: mongodb
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        name: mongodb
+spec:
+  containers:
+  - resources:
+    limits:
+      cpu: 0.3
+    image: mongo
+    imagePullPolicy: IfNotPresent
+    name: mongodb
+    ports:
+    - containerPort: 27017
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    name: mongowhatever
+  name: mongoservice
+spec:
+  ports:
+  - port: 27017
+    targetPort: 27017
+    protocol: TCP
+  selector:
+    name: mongodb

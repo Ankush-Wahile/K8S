@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nodepod
+  namespace: test-ns
+  labels:
+    app2: nodeapp
+spec:
+  containers:
+    - name: nodecontainer
+      image: ankush3891/nodejsapp:1
+      ports:
+        - containerPort: 9981
+
